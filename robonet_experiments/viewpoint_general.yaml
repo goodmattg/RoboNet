@@ -5,7 +5,7 @@
 batch_size: 16
 train_class: VPredTrainable 
 max_steps: 300000
-train_fraction: search/grid([0.9, 0.1, 0.01, 0.001])
+train_fraction: 0.9
 
 # list of dictionaries containing data sources along with filter parameters
 batch_config:
@@ -20,11 +20,7 @@ loader_hparams:
   buffer_size: 10
   load_T: 15
   color_augmentation: 0.1
-  cams_to_load: grid/search[
-    [0, 1],
-    [1, 2],
-    [0, 2]
-  ]
+  cams_to_load: search/grid[[0, 1],[1, 2],[0, 2]]
 
 # model_hparams used to create graph and loss function
 model_hparams:
