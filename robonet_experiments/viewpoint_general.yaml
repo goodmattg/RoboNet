@@ -1,0 +1,33 @@
+# example configuration file for training a set of video prediction model on baxter data from RoboNet
+# each model is trained on a different set of cameras
+
+# general experiment configurations
+batch_size: 16
+train_class: VPredTrainable 
+max_steps: 300000
+train_fraction: search/grid([0.9, 0.1, 0.01, 0.001])
+
+# list of dictionaries containing data sources along with filter parameters
+batch_config:
+  # selects baxter data with autograsp enabled (adim=4, robot=baxter)
+  - data_directory: ${DATA_DIR}
+    robot: "baxter"
+    adim: 4
+
+# loader_hparams used to initialize loader object
+loader_hparams:
+  dataset: "RoboNet"
+  buffer_size: 10
+  load_T: 15
+  color_augmentation: 0.1
+  cams_to_load: grid/search[
+    [0, 1],
+    [1, 2],
+    [0, 2]
+  ]
+
+# model_hparams used to create graph and loss function
+model_hparams:
+  model: deterministic
+  graph_type: vgg_conv
+  tv_weight: 0.0
