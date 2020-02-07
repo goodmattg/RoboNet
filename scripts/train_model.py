@@ -1,3 +1,6 @@
+import warnings
+warnings.filterwarnings("ignore")
+
 import argparse
 from robonet import get_trainable, GIFLogger
 import tensorflow as tf
@@ -5,6 +8,7 @@ import ray
 import ray.tune as tune
 from robonet.yaml_util import parse_tune_config as parse_config
 import os
+import pdb
 
 
 def trial_str_creator(trial):

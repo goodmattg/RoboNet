@@ -249,11 +249,13 @@ def load_data(f_name, file_metadata, hparams, rng=None):
     assert os.path.exists(f_name) and os.path.isfile(f_name), "invalid f_name"
     with open(f_name, "rb") as f:
         buf = f.read()
+
     assert (
         hashlib.sha256(buf).hexdigest() == file_metadata["sha256"]
     ), "file hash doesn't match meta-data. maybe delete pkl and re-generate?"
 
-    with h5py.File(io.BytesIO(buf), "r") as hf:
+    # BUG: Gettting HDF5 error thrown, trying to give file name
+    with h5py.File(f_name, "r") as hf:
         start_time = 0
 
         # Lower bound on sequence length (should all be same)

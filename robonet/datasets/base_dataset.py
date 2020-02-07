@@ -27,6 +27,7 @@ class BaseVideoDataset(object):
                     self._metadata.append(d)
 
         # initialize hparams and store metadata_frame
+        print(hparams)
         self._hparams = self._get_default_hparams().override_from_dict(hparams)
 
         self._init_rng()
