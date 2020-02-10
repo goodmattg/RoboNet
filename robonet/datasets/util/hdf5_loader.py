@@ -311,7 +311,7 @@ if __name__ == "__main__":
     import random
     import matplotlib.pyplot as plt
 
-    override_hparams = {"cams_to_load": [0, 1]}
+    override_hparams = {"cams_to_load": [0, 1, 2], "target_adim": 5}
 
     parser = argparse.ArgumentParser(
         description="tests hdf5 data loader without tensorflow dataset wrapper"
@@ -336,6 +336,8 @@ if __name__ == "__main__":
 
     hparams = DotMap(override_dict(default_loader_hparams(), override_hparams))
     hparams.load_T = args.load_steps
+
+    pdb.set_trace()
 
     if args.load_annotations:
         hparams.load_annotations = True
